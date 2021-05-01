@@ -2526,6 +2526,26 @@ func (s *Session) ApplicationCommands(appID, guildID string) (cmd []*Application
 	return
 }
 
+func (s *Session) ApplicationCommandPermissionCreate(appID string, guildID string, commandID string, permissions []*ApplicationCommandPermission) (err error) {
+	if appID == "" {
+		appID = s.State.User.ID
+	}
+	endpoint := EndpointApplicationGlobalCommands(s.State.User.ID)
+	if guildID != "" {
+		endpoint = EndpointApplicationGuildCommands(s.State.User.ID, guildID)
+	}
+	if commandID == "" {
+		err = errors.New("command ID cannot be empty")
+		return
+	}
+	v := &ApplicationCommandPermissionCreateData{Permissions: permissions}
+	_, err = s.RequestWithBucketID("POST", endpoint, *v, endpoint)
+	if err != nil {
+		return
+	}
+	return
+}
+
 // InteractionRespond creates the response to an interaction.
 // appID       : The application ID.
 // interaction : Interaction instance.

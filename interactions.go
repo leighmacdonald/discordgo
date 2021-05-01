@@ -23,6 +23,16 @@ type ApplicationCommand struct {
 	Options       []*ApplicationCommandOption `json:"options"`
 }
 
+type ApplicationCommandPermission struct {
+	ID         string `json:"id"`
+	Type       int    `json:"type"`
+	Permission bool   `json:"permission"`
+}
+
+type ApplicationCommandPermissionCreateData struct {
+	Permissions []*ApplicationCommandPermission `json:"permissions"`
+}
+
 // ApplicationCommandOptionType indicates the type of a slash command's option.
 type ApplicationCommandOptionType uint8
 
@@ -46,9 +56,10 @@ type ApplicationCommandOption struct {
 	// NOTE: This feature was on the API, but at some point developers decided to remove it.
 	// So I commented it, until it will be officially on the docs.
 	// Default     bool                              `json:"default"`
-	Required bool                              `json:"required"`
-	Choices  []*ApplicationCommandOptionChoice `json:"choices"`
-	Options  []*ApplicationCommandOption       `json:"options"`
+	Required          bool                              `json:"required"`
+	Choices           []*ApplicationCommandOptionChoice `json:"choices"`
+	Options           []*ApplicationCommandOption       `json:"options"`
+	DefaultPermission bool                              `json:"default_permission"`
 }
 
 // ApplicationCommandOptionChoice represents a slash command option choice.
