@@ -15,12 +15,13 @@ const InteractionDeadline = time.Second * 3
 
 // ApplicationCommand represents an application's slash command.
 type ApplicationCommand struct {
-	ID            string                      `json:"id"`
-	ApplicationID string                      `json:"application_id,omitempty"`
-	Name          string                      `json:"name"`
-	Description   string                      `json:"description,omitempty"`
-	Version       string                      `json:"version,omitempty"`
-	Options       []*ApplicationCommandOption `json:"options"`
+	ID                string                      `json:"id"`
+	ApplicationID     string                      `json:"application_id,omitempty"`
+	Name              string                      `json:"name"`
+	Description       string                      `json:"description,omitempty"`
+	Version           string                      `json:"version,omitempty"`
+	Options           []*ApplicationCommandOption `json:"options"`
+	DefaultPermission bool                        `json:"default_permission"`
 }
 
 type ApplicationCommandPermission struct {
@@ -56,10 +57,9 @@ type ApplicationCommandOption struct {
 	// NOTE: This feature was on the API, but at some point developers decided to remove it.
 	// So I commented it, until it will be officially on the docs.
 	// Default     bool                              `json:"default"`
-	Required          bool                              `json:"required"`
-	Choices           []*ApplicationCommandOptionChoice `json:"choices"`
-	Options           []*ApplicationCommandOption       `json:"options"`
-	DefaultPermission bool                              `json:"default_permission"`
+	Required bool                              `json:"required"`
+	Choices  []*ApplicationCommandOptionChoice `json:"choices"`
+	Options  []*ApplicationCommandOption       `json:"options"`
 }
 
 // ApplicationCommandOptionChoice represents a slash command option choice.
